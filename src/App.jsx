@@ -13,9 +13,12 @@ function App() {
 
   return (
     <TodoContext.Provider value={{list, setList}}>
+
       <AddTodo updateList={(todo)=> setList([...list,  {id: list.length+1, todoData: todo, finished: false}])} />
       {console.log(list)}
+      
       <TodoList  />
+
     </TodoContext.Provider>
   )
 }
