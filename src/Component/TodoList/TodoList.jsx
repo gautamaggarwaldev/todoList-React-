@@ -26,6 +26,15 @@ function TodoList() {
                                                     const updatedList = list.filter(t => t.id != todo.id);
                                                     setList(updatedList);
                                                 }}
+                                                onEdit={(todoText)=> {
+                                                    const updatedList = list.map(t => {
+                                                        if(t.id == todo.id) {
+                                                            todo.todoData = todoText;
+                                                        }
+                                                        return t;
+                                                    });
+                                                    setList(updatedList);
+                                                }}
                                             />)}
 
         </div>
