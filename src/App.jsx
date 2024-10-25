@@ -1,26 +1,28 @@
 import './App.css'
 import AddTodo from './Component/AddTodo/AddTodo'
-import { useState } from 'react'
+import { useReducer } from 'react'
 import TodoList from './Component/TodoList/TodoList'
 import TodoContext from './context/TodoContext';
+import TodoDispatchContext from './context/TodoDispatchContext';
+import todoReducer from './reducer/todoReducer';
 
 function App() {
 
-  const [list, setList] = useState([
-    { id: 1, todoData: 'todo 1', finished: false },
-    { id: 2, todoData: 'todo 2', finished: true }
-  ]);
+  const [list, dispatch] = useReducer(todoReducer, []);
 
   return (
-    <TodoContext.Provider value={{list, setList}}>
+    <TodoContext.Provider value={{ list }}>
+      <TodoDispatchContext.Provider value={{dispatch}}>
 
-      <AddTodo updateList={(todo)=> setList([...list,  {id: list.length+1, todoData: todo, finished: false}])} />
-      {console.log(list)}
-      
-      <TodoList  />
+        <AddTodo />
+        {console.log(list)}
+        <TodoList />
+
+      </TodoDispatchContext.Provider>
 
     </TodoContext.Provider>
   )
+  
 }
 
 export default App
